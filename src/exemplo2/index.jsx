@@ -1,24 +1,28 @@
 import { useEffect, useState } from "react";
 
 export default function App() {
-  
-  const [??,??] = useState([]);
 
-  useEffect(() => { 
+  const [fotos, setFotos] = useState([]); 
 
-    const buscarUsuario  = async () => {
-                    = await fetch('https://jsonplaceholder.typicode.com/photos');
-        const dados =                ;
-        setFotos(dados);
+  useEffect(() => {
+    const buscarUsuario = async () => {
+      const resposta = await fetch('https://jsonplaceholder.typicode.com/photos');
+      const dados = await resposta.json(); 
+      setFotos(dados); 
     }
     buscarUsuario();
-  }, //complete o código);
+  }, []); 
 
   return (
     <>
       <h1>Galeria de Fotos</h1>
       <ul>
-        {}
+        {fotos.slice(0, 10).map((foto) => ( 
+          <li key={foto.id}>
+            <img src={foto.thumbnailUrl} alt={foto.title} />
+            <p>{foto.title}</p>
+          </li>
+        ))}
       </ul>
     </>
   );
